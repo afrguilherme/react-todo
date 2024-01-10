@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useRef } from "react"
+import "./App.css"
+import ToDoItem from "./components/toDoItem"
 
 function App() {
+  const [value, setValue] = useState("")
+  const [data, setData] = useState([])
+  const inputEl = useRef(null)
+
+  const handleClick = () => {
+    setData((prev) => [...prev, value])
+    setValue("")
+    inputEl.current.focus()
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <div className="form">
+        <input
+          value={value}
+          ref={inputEl}
+          type="text"
+          onChange={(event) => setValue(event.target.value)}
+        />
+        <button onClick={handleClick}>Add</button>
+      </div>
+      <div>
+        <ul>
+          {data.map((item, index) => (
+            <ToDoItem key={index}>{item}</ToDoItem>
+          ))}
+        </ul>
+      </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
