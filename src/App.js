@@ -15,21 +15,25 @@ function App() {
 
   return (
     <div className="container">
-      <div className="form">
-        <input
-          value={value}
-          ref={inputEl}
-          type="text"
-          onChange={(event) => setValue(event.target.value)}
-        />
-        <button onClick={handleClick}>Add</button>
-      </div>
-      <div>
-        <ul>
-          {data.map((item, index) => (
-            <ToDoItem key={index}>{item}</ToDoItem>
-          ))}
-        </ul>
+      <div className="container-items">
+        <h1>Tarefas</h1>
+        <div className="form">
+          <input
+            className="input-form"
+            value={value}
+            ref={inputEl}
+            type="text"
+            onChange={(event) => setValue(event.target.value)}
+          />
+          <button onClick={handleClick}>Adicionar</button>
+        </div>
+        <div>
+          <ul>
+            {data.map((item, index) => (
+              <ToDoItem key={index}>{item}</ToDoItem>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   )

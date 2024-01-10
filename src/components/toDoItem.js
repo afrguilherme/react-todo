@@ -1,5 +1,10 @@
 function ToDoItem({ children }) {
-  return <li>{children}</li>
+  return (
+    <div className="task-item">
+      <input type="checkbox" />
+      <li>{children}</li>
+    </div>
+  )
 }
 
 export default ToDoItem
