@@ -1,4 +1,4 @@
-import { TaskItem, ListItem } from "../styles"
+import { TaskItem, ListItem } from "../styles";
 
 function ToDoItem({ children }) {
   return (
@@ -6,7 +6,7 @@ function ToDoItem({ children }) {
       <input type="checkbox" />
       <ListItem>{children}</ListItem>
     </TaskItem>
-  )
+  );
 }
 
-export default ToDoItem
+export default ToDoItem;

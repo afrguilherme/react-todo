@@ -1,33 +1,36 @@
-import { useState, useRef, useEffect } from "react"
-import { Container, ContainerItems, Button, Input } from "./styles"
-import ToDoItem from "./components/toDoItem"
+import { useState, useRef, useEffect } from "react";
+import { Container, ContainerItems, Button, Input } from "./styles";
+import ToDoItem from "./components/toDoItem";
 
 function App() {
-  const [value, setValue] = useState("")
-  const [data, setData] = useState([])
-  const inputEl = useRef(null)
+  const [value, setValue] = useState("");
+  const [data, setData] = useState(() => {
+    const taskInfo = localStorage.getItem("ToDo:Tasks");
+
+    return taskInfo ? JSON.parse(taskInfo) : [];
+  });
+
+  const inputEl = useRef(null);
 
   const handleClick = () => {
-    setData((prev) => [...prev, value])
-
-    setValue("")
-    inputEl.current.focus()
-  }
+    setData((prev) => [...prev, value]);
+    setValue("");
+    inputEl.current.focus();
+  };
 
   useEffect(() => {
-    const putTasks = () => {
-      localStorage.setItem("ToDo:Tasks", JSON.stringify(data))
-    }
-    putTasks()
-
     const loadTasks = () => {
-      const taskInfo = localStorage.getItem("ToDo:Tasks")
+      const taskInfo = localStorage.getItem("ToDo:Tasks");
+      setData(JSON.parse(taskInfo));
+    };
+    loadTasks();
+  }, []);
 
-      if (taskInfo) {
-        setData(JSON.parse(taskInfo))
-      }
-    }
-  }, [data])
+  useEffect(() => {
+    localStorage.setItem("ToDo:Tasks", JSON.stringify(data));
+  }, [data]);
+
+  localStorage.setItem("ToDo:Tasks", JSON.stringify(data));
 
   return (
     <Container>
@@ -46,13 +49,15 @@ function App() {
           <ul>
             {data &&
               data.map((item, index) => (
-                <ToDoItem key={index}>{item}</ToDoItem>
+                <ToDoItem key={index}>
+                  <p>{item}</p>
+                </ToDoItem>
               ))}
           </ul>
         </div>
       </ContainerItems>
     </Container>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from "styled-components";
 
 export const Container = styled.div`
   background: #999999;
@@ -12,16 +12,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-
-  .input-form {
-    margin-right: 10px;
-    height: 30px;
-    width: 300px;
-    outline: none;
-    font-size: 16px;
-    padding-left: 15px;
-  }
-`
+`;
 
 export const ContainerItems = styled.div`
   background-color: #ebebeb;
@@ -40,7 +31,7 @@ export const ContainerItems = styled.div`
   .form {
     margin-bottom: 10px;
   }
-`
+`;
 
 export const TaskItem = styled.div`
   display: flex;
@@ -51,20 +42,26 @@ export const TaskItem = styled.div`
   border-radius: 5px;
   justify-content: space-around;
   align-items: center;
-`
+`;
 export const ListItem = styled.div`
   list-style: none;
-`
+
+  p {
+    font-size: 16px;
+    font-weight: 400;
+  }
+`;
 
 export const Button = styled.button`
   height: 30px;
   width: 80px;
-`
+`;
 export const Input = styled.input`
   margin-right: 10px;
   height: 30px;
   width: 300px;
   outline: none;
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: 400;
   padding-left: 15px;
-`
+`;
