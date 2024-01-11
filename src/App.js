@@ -1,5 +1,5 @@
-import { useState, useRef } from "react"
-import "./App.css"
+import { useState, useRef, useEffect } from "react"
+import { Container, ContainerItems, Button, Input } from "./styles"
 import ToDoItem from "./components/toDoItem"
 
 function App() {
@@ -9,33 +9,49 @@ function App() {
 
   const handleClick = () => {
     setData((prev) => [...prev, value])
+
     setValue("")
     inputEl.current.focus()
   }
 
+  useEffect(() => {
+    const putTasks = async () => {
+      localStorage.setItem("ToDo:Tasks", JSON.stringify(data))
+    }
+    putTasks()
+
+    const loadTasks = async () => {
+      const taskInfo = await localStorage.getItem("ToDo:Tasks")
+
+      if (taskInfo) {
+        setData(JSON.parse(taskInfo))
+      }
+    }
+  }, [data])
+
   return (
-    <div className="container">
-      <div className="container-items">
+    <Container>
+      <ContainerItems>
         <h1>Tarefas</h1>
         <div className="form">
-          <input
-            className="input-form"
+          <Input
             value={value}
             ref={inputEl}
             type="text"
             onChange={(event) => setValue(event.target.value)}
           />
-          <button onClick={handleClick}>Adicionar</button>
+          <Button onClick={handleClick}>Adicionar</Button>
         </div>
         <div>
           <ul>
-            {data.map((item, index) => (
-              <ToDoItem key={index}>{item}</ToDoItem>
-            ))}
+            {data &&
+              data.map((item, index) => (
+                <ToDoItem key={index}>{item}</ToDoItem>
+              ))}
           </ul>
         </div>
-      </div>
-    </div>
+      </ContainerItems>
+    </Container>
   )
 }
 

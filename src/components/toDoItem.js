@@ -1,9 +1,11 @@
+import { TaskItem, ListItem } from "../styles"
+
 function ToDoItem({ children }) {
   return (
-    <div className="task-item">
+    <TaskItem>
       <input type="checkbox" />
-      <li>{children}</li>
-    </div>
+      <ListItem>{children}</ListItem>
+    </TaskItem>
   )
 }
 
