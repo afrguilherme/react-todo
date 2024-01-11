@@ -15,13 +15,13 @@ function App() {
   }
 
   useEffect(() => {
-    const putTasks = async () => {
+    const putTasks = () => {
       localStorage.setItem("ToDo:Tasks", JSON.stringify(data))
     }
     putTasks()
 
-    const loadTasks = async () => {
-      const taskInfo = await localStorage.getItem("ToDo:Tasks")
+    const loadTasks = () => {
+      const taskInfo = localStorage.getItem("ToDo:Tasks")
 
       if (taskInfo) {
         setData(JSON.parse(taskInfo))
