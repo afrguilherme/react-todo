@@ -37,14 +37,24 @@ export const TaskItem = styled.div`
   display: flex;
   gap: 20px;
   margin-bottom: 20px;
-  background-color: #838383;
+  background-color: #ffffff;
   height: 30px;
   border-radius: 5px;
-  justify-content: space-around;
   align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  border: ${(props) => (props.$isChecked ? "2px solid green" : "none")};
+  img {
+    width: 20px;
+    cursor: pointer;
+  }
 `;
+
 export const ListItem = styled.div`
   list-style: none;
+  display: flex;
+  justify-content: space-between;
+  width: 60%;
 
   p {
     font-size: 16px;

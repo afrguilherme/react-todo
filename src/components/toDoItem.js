@@ -1,9 +1,9 @@
-import { TaskItem, ListItem } from "../styles";
+import { TaskItem, ListItem, CheckBoxInput } from "../styles";
 
-function ToDoItem({ children }) {
+function ToDoItem({ children, $isChecked }) {
   return (
-    <TaskItem>
-      <input type="checkbox" />
+    <TaskItem $isChecked={$isChecked}>
+      <input type="checkbox" checked={$isChecked} />
       <ListItem>{children}</ListItem>
     </TaskItem>
   );
