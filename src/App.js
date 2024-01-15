@@ -15,7 +15,10 @@ function App() {
 
   const handleClick = () => {
     if (value) {
-      setData((prev) => [...prev, { text: value, $isChecked: false }])
+      setData((prev) => [
+        ...prev,
+        { id: Math.random(), text: value, $isChecked: false },
+      ])
       setValue("")
       inputEl.current.focus()
     } else {
@@ -23,9 +26,9 @@ function App() {
     }
   }
 
-  const handleCheckboxChange = (index, $isChecked) => {
+  const handleCheckboxChange = (id, $isChecked) => {
     setData((prev) =>
-      prev.map((task, i) => (i === index ? { ...task, $isChecked } : task))
+      prev.map((task) => (task.id === id ? { ...task, $isChecked } : task))
     )
   }
 
@@ -52,8 +55,12 @@ function App() {
     localStorage.setItem("ToDo:Tasks", JSON.stringify(data))
   }, [data])
 
-  const deleteTask = (index) => {
-    setData((prev) => prev.filter((_, itemIndex) => itemIndex !== index))
+  const deleteTask = (id) => {
+    setData((prev) => {
+      const updatedData = prev.filter((task) => task.id !== id)
+      localStorage.setItem("ToDo:Tasks", JSON.stringify(updatedData))
+      return updatedData
+    })
   }
 
   return (
@@ -74,18 +81,18 @@ function App() {
         <div>
           <ul>
             {data &&
-              data.map((task, index) => (
+              data.map((task) => (
                 <ToDoItem
                   text={task.text}
                   $isChecked={task.$isChecked}
                   onCheckboxChange={(isChecked) =>
-                    handleCheckboxChange(index, isChecked)
+                    handleCheckboxChange(isChecked)
                   }
-                  key={index}
+                  key={task.id}
                 >
                   <p>{task.text}</p>
                   <button
-                    onClick={() => deleteTask(index)}
+                    onClick={() => deleteTask(task.id)}
                     className="delete-button"
                     style={{
                       background: "none",
