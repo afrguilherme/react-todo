@@ -1,23 +1,8 @@
-import { useState } from "react"
+import { TaskItem, ListItem } from "../containers/styles"
 
-import { TaskItem, ListItem } from "../styles"
-
-function ToDoItem({ children, $isChecked, onCheckboxChange }) {
-  const [isChecked, setChecked] = useState($isChecked)
-
-  const handleCheckboxChange = () => {
-    const newCheckedState = !isChecked
-    setChecked(newCheckedState)
-    onCheckboxChange(newCheckedState)
-  }
-
+function ToDoItem({ children, $isChecked }) {
   return (
-    <TaskItem $isChecked={isChecked}>
-      <input
-        type="checkbox"
-        onChange={handleCheckboxChange}
-        defaultChecked={isChecked}
-      />
+    <TaskItem $isChecked={$isChecked}>
       <ListItem>{children}</ListItem>
     </TaskItem>
   )

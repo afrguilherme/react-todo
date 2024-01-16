@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react"
 import { Container, ContainerItems, Button, Input } from "./styles"
-import ToDoItem from "./components/toDoItem"
-import TrashIcon from "./assets/trash.png"
+import ToDoItem from "../components/toDoItem"
+import TrashIcon from "../assets/trash.png"
 
 function App() {
   const [value, setValue] = useState("")
@@ -26,9 +26,11 @@ function App() {
     }
   }
 
-  const handleCheckboxChange = (id, $isChecked) => {
+  const handleCheckboxChange = (id, isChecked) => {
     setData((prev) =>
-      prev.map((task) => (task.id === id ? { ...task, $isChecked } : task))
+      prev.map((task) =>
+        task.id === id ? { ...task, $isChecked: isChecked } : task
+      )
     )
   }
 
@@ -90,6 +92,13 @@ function App() {
                   }
                   key={task.id}
                 >
+                  <input
+                    type="checkbox"
+                    checked={task.$isChecked}
+                    onChange={() =>
+                      handleCheckboxChange(task.id, !task.$isChecked)
+                    }
+                  />
                   <p>{task.text}</p>
                   <button
                     onClick={() => deleteTask(task.id)}

@@ -29,21 +29,22 @@ export const ContainerItems = styled.div`
   }
 
   .form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: 10px;
   }
 `
 
 export const TaskItem = styled.div`
   display: flex;
-  gap: 20px;
+  justify-content: center;
   margin-bottom: 20px;
   background-color: #ffffff;
   height: 30px;
   border-radius: 5px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 50px;
   border: ${(props) => (props.$isChecked ? "2px solid green" : "none")};
+
   img {
     width: 20px;
     cursor: pointer;
@@ -53,13 +54,20 @@ export const TaskItem = styled.div`
 export const ListItem = styled.div`
   list-style: none;
   display: flex;
-  justify-content: space-between;
-  width: 60%;
+  justify-content: space-around;
+  min-width: max-content;
+  width: 100%;
   align-items: center;
+  padding: 0 20px;
 
   p {
+    padding: 0 15px;
     font-size: 16px;
     font-weight: 400;
+  }
+
+  input {
+    outline: none;
   }
 `
 
